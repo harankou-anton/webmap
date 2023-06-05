@@ -135,3 +135,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GEOS_LIBRARY_PATH = '/home/anton-harankou/geos-3.11.0/build/lib/libgeos_c.so'
 GDAL_LIBRARY_PATH = '/home/anton-harankou/gdal-3.5.3/.libs/libgdal.so'
+
+GEOSERVER = {
+    "HOST": "localhost",
+    "PORT": 8080,
+    "LOGIN_GEOSERVER": "admin",
+    "PASSWORD_GEOSERVER": "geoserver",
+    "WORKSPACES": "layers",
+    "STORE_NAME": 'geo_data'
+}

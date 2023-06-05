@@ -20,7 +20,8 @@ class Layer(models.Model):
 class LayerAccess(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="layer_accsses")
     layer_id = models.ForeignKey("profiles.Layer", on_delete=models.CASCADE, related_name="layer_accsses")
-    access_code = models.ForeignKey('profiles.Accsess', related_name="layer_accsses", on_delete=models.CASCADE)
+    access_code = models.ForeignKey('profiles.Accsess', related_name="layer_accsses", null=True, blank=True,
+                                    on_delete=models.SET_NULL)
 
 class Accsess(models.Model):
     access_code = models.IntegerField(primary_key=True)

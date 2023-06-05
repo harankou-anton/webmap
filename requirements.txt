@@ -1,0 +1,5 @@
+Django==4.2.1
+psycopg2-binary==2.9.6
+crispy-bootstrap5==0.7
+GDAL==3.5.3
+geoserver-rest==2.4.1
