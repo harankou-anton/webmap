@@ -9,3 +9,51 @@ body {
     margin: 0;
     height: 100%;
 }
+
+.ol-control button {
+    background-color: rgba(40, 40, 40, 0.8) !important;
+}
+.ol-control button:hover {
+    background-color: rgba(40, 40, 40, 1) !important;
+}
+
+.ol_input_geocoder{
+  position:fixed;
+  top:50%;
+  left:2px;
+  z-index:20;
+}
+
+.ol-geocoder{
+  position:fixed !important;
+  top:10px !important;
+  left:35% !important;
+  width:100%;
+}
+
+.gcd-gl-control{
+  width:100% !important;
+  background:none !important;
+}
+
+.gcd-gl-btn{
+  display:none !important;
+}
+
+.ol-geocoder .gcd-gl-input{
+  left:0 !important;
+}
+
+ul.gcd-gl-result{
+  left:0 !important;
+}
+
+#marker {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background:url(https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png) no-repeat top center;
+  background-size:100%;
+  opacity: 1;
+  cursor: move;
+}
