@@ -11,7 +11,9 @@ const view = new ol.View({
     });
 
 var map = new ol.Map({
-    layers: [
+    layers: [new ol.layer.Tile({
+            source: new ol.source.OSM()
+        }),
         new ol.layer.Tile({
            source: new ol.source.TileWMS({
                attributions: '@geoserver',

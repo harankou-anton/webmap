@@ -19,10 +19,13 @@ from django.contrib import admin
 from django.urls import path
 
 from map.views import IndexView
+from profiles.views import auth, register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='map'),
+    path('auth_page', auth, name='auth_page'),
+    path('sign_up', register, name='register'),
 ]
 
 if settings.DEBUG:

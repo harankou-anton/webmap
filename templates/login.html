@@ -1,0 +1,14 @@
+{% extends "base_text.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+  <div class="container">
+  <div class="col">
+    <h1>Authorization</h1>
+    <form method="POST" class="post-form">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="login btn btn-default">Login</button>
+    </form>
+  </div>
+  </div>
+{% endblock %}
