@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from profiles.forms import LoginForm, RegisterForm, UploadedData
+from profiles.upload_data import uploading_process
 
 
 # Create your views here.
@@ -42,8 +43,8 @@ def upload_file(request):
     if request.method == "POST":
         form = UploadedData (request.POST, request.FILES)
         if form.is_valid():
-            ...
-            return redirect(request, "map.html")
+            uploading_process(request.FILES['file'], form.cleaned_data['name'])
+            return redirect("map")
     else:
         form = UploadedData()
     return render(request, "upload_page.html", {"form": form})

@@ -4,3 +4,6 @@ crispy-bootstrap5==0.7
 GDAL==3.5.3
 geoserver-rest==2.4.1
 geopandas==0.13.1
+sqlalchemy==2.0.16
+sqlalchemy_utils==0.41.1
+GeoAlchemy2==0.13.3
