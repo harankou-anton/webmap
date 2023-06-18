@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from profiles.forms import LoginForm, RegisterForm, UploadedData
 from profiles.upload_data import uploading_process
+from profiles.models import LayerAccess, Layer, Accsess
+from django.db.models import Q
 
 
 # Create your views here.
@@ -48,3 +50,7 @@ def upload_file(request):
     else:
         form = UploadedData()
     return render(request, "upload_page.html", {"form": form})
+
+def layer_list(request):
+    data = Layer.objects.filter(Q(layer_accsses__access_code=0) & Q(layer_accsses__user_id=request.user.id))
+    return render(request, "list_layer.html", {"data": data})

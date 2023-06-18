@@ -19,14 +19,15 @@ from django.contrib import admin
 from django.urls import path
 
 from map.views import IndexView
-from profiles.views import auth, register, upload_file
+from profiles.views import auth, register, upload_file, layer_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='map'),
     path('signin', auth, name='auth'),
     path('signup', register, name='register'),
-    path("upload", upload_file, name='upload_file')
+    path("upload", upload_file, name='upload_file'),
+    path("layers", layer_list, name='layer_list')
 ]
 
 if settings.DEBUG:
