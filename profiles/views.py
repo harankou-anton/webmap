@@ -43,7 +43,7 @@ def upload_file(request):
     if request.method == "POST":
         form = UploadedData (request.POST, request.FILES)
         if form.is_valid():
-            uploading_process(request.FILES['file'], form.cleaned_data['name'])
+            uploading_process(request.FILES['file'], form.cleaned_data['name'], request.user.id)
             return redirect("map")
     else:
         form = UploadedData()

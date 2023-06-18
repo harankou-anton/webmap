@@ -14,7 +14,7 @@ class ProfileUser(models.Model):
     )
 
 class Layer(models.Model):
-    layer_id = models.IntegerField(primary_key=True,)
+    layer_id = models.CharField(primary_key=True)
     table_name = models.CharField()
 
 class LayerAccess(models.Model):
