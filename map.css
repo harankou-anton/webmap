@@ -1,14 +1,27 @@
+main{
+    padding: 0;
+    margin: 0;
+}
 .map {
     padding: 0;
     margin: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     position: absolute;
 }
+.btn-group-vertical{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 114%;
+}
 .info{
     z-index: 99;
     position: absolute;
-}
-body {
-    margin: 0;
-}
+    }
+
+
+
