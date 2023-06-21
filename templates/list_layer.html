@@ -17,7 +17,9 @@
         <tr>
           <th scope="row">{{ forloop.counter }}</th>
           <td>{{ detail.table_name }}</td>
-          <td><button type="button" class="login btn btn-success">Details</button></td>
+          <td>
+              <a class="btn btn-success" href="{% url 'details' detail.layer_id %}" role="button">Details</a>
+          </td>
         </tr>
       {% endfor %}
       </tbody>

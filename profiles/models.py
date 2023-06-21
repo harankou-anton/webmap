@@ -16,6 +16,7 @@ class ProfileUser(models.Model):
 class Layer(models.Model):
     layer_id = models.CharField(primary_key=True)
     table_name = models.CharField()
+    table_fields = models.JSONField(null=True, blank=True)
 
 class LayerAccess(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="layer_accsses")

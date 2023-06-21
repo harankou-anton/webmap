@@ -1,0 +1,12 @@
+{% extends "base_text.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+  <div class="container">
+  <div class="col-5">
+    <h1>{{ details.table_name }}</h1>
+      {% for names in details.table_fields %}
+      <p>{{ names }}</p>
+      {% endfor %}
+  </div>
+  </div>
+{% endblock %}

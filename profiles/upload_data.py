@@ -19,8 +19,9 @@ def uploading_process(file_name, table_name, owner_layer):
     # Upload data to database's tables
     uuid_table = str(uuid.uuid4())
     gdf = gpd.read_file(file_name)
+    column_names = gdf.columns.to_list()
     gdf.to_postgis(name=uuid_table, con=engine, schema='geodata')
-    Layer.objects.create(layer_id=uuid_table, table_name=table_name)
+    Layer.objects.create(layer_id=uuid_table, table_name=table_name, table_fields=column_names)
     LayerAccess.objects.create(user_id_id=owner_layer, layer_id_id=uuid_table, access_code_id=0)
 
     # Publish layer on geoserver

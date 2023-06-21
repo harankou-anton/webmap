@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from profiles.forms import LoginForm, RegisterForm, UploadedData
 from profiles.upload_data import uploading_process
 from profiles.models import LayerAccess, Layer, Accsess
@@ -54,3 +54,8 @@ def upload_file(request):
 def layer_list(request):
     data = Layer.objects.filter(Q(layer_accsses__access_code=0) & Q(layer_accsses__user_id=request.user.id))
     return render(request, "list_layer.html", {"data": data})
+
+
+def details(request, layer_id):
+    details = get_object_or_404(Layer, layer_id=layer_id)
+    return render(request, "details.html", {"details": details})
