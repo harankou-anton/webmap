@@ -2,11 +2,21 @@
 {% load crispy_forms_filters %}
 {% block content %}
   <div class="container">
-  <div class="col-5">
+  <div class="col-12">
     <h1>{{ details.table_name }}</h1>
+    <div class="row">
+        <div class="col-4">
+            <p>Update layer</p>
+            <form method="POST" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="save btn btn-success">Update</button>
+            </form>
+    </div>
       {% for names in details.table_fields %}
       <p>{{ names }}</p>
       {% endfor %}
+  </div>
   </div>
   </div>
 {% endblock %}

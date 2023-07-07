@@ -2,8 +2,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from profiles.forms import LoginForm, RegisterForm, UploadedData
+from profiles.forms import LoginForm, RegisterForm, UploadedData, UpdateData
 from profiles.upload_data import uploading_process
+from profiles.update_data import updating_process
 from profiles.models import LayerAccess, Layer, Accsess
 from django.db.models import Q
 
@@ -21,7 +22,7 @@ def auth(request):
             if user is None:
                 return HttpResponse("BadRequest", status=400)
             login(request, user)
-            return redirect("map")
+            return redirect("map", {"user": user})
     else:
         form = LoginForm()
     return render(request, "login.html", {"form": form})
@@ -58,4 +59,10 @@ def layer_list(request):
 
 def details(request, layer_id):
     details = get_object_or_404(Layer, layer_id=layer_id)
-    return render(request, "details.html", {"details": details})
+    form = UpdateData()
+    if request.method == "POST":
+        form = UpdateData(request.POST, request.FILES)
+        if form.is_valid():
+            updating_process(request.FILES['file'], layer_id)
+            return redirect("map")
+    return render(request, "details.html", {"details": details, "form": form})
