@@ -17,6 +17,7 @@
 <main class="container">
     <div id="info" class="info">&nbsp;</div>
     <div id="map" class="map" ></div>
+    {% if user.authenticated%}
     <div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="map-buttons">
       <button type="button" class="btn btn-primary">Details</button>
         <div class="btn-group" role="group">
@@ -40,6 +41,9 @@
 
       <button type="button" class="btn btn-danger">Logout</button>
     </div>
+        {% else %}
+        <button type="button" class="btn btn-success" id="login-btn">Login</button>
+    {% endif %}
 </main>
 <script src="/map.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
