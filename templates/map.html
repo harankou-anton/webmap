@@ -40,7 +40,9 @@
                     <li><a class="dropdown-item" href="#">Pr2</a></li>
                 </ul>
             </div>
-            <button type="button" class="btn btn-danger">Logout</button>
+            <a href="{% url 'signout' %}">
+                <button type="button" class="btn btn-danger" id="auth-btn" name="logout-btn">Logout</button>
+            </a>
         </div>
     {% else %}
         <div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="buttons-unauth">

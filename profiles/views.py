@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -22,7 +22,7 @@ def auth(request):
             if user is None:
                 return HttpResponse("BadRequest", status=400)
             login(request, user)
-            return redirect("map", {"user": user})
+            return redirect("map")
     else:
         form = LoginForm()
     return render(request, "login.html", {"form": form})
@@ -40,6 +40,11 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, "register.html", {"form": form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("map")
 
 
 def upload_file(request):
