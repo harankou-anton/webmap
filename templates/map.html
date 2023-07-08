@@ -17,23 +17,31 @@
 <main class="container">
     <div id="info" class="info">&nbsp;</div>
     <div id="map" class="map"></div>
+    <div class="container" id="proj-canv">
+        <div class="col" id="name-head">
+            <p>Cool app name</p>
+        </div>
+    </div>
+    </div>
     {% if user.is_authenticated %}
         <div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="map-buttons">
-            <button type="button" class="btn btn-primary">Profile</button>
-            <div class="btn-group" role="group">
+            <a href="{% url 'layer_list' %}">
+                <button type="button" class="btn btn-primary">Layers/Projects</button>
+            </a>
+            <div class="btn-group" role="group" id="baselayers">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Background
+                    Backgrounds
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">OSM</a></li>
-                    <li><a class="dropdown-item" href="#">Google Images</a></li>
+                    <button class="dropdown-item" type="button" value="osmlayer">OSM</button>
+                    <button class="dropdown-item" type="button" value="googleImages">Google Images</button>
                 </ul>
             </div>
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Project
+                    Select Project
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Pr1</a></li>

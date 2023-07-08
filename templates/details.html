@@ -4,7 +4,13 @@
     <div class="container">
         <div class="col-12">
             <h1>{{ details.table_name }}</h1>
-            <div class="row">
+            <div class="row mb-1">
+                <div class="col-2">
+                <p>Legend Graphic</p>
+                <img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=layers:{{ details.layer_id }}&WIDTH=10&HEIGHT=10&Transparent=True&scale=1&legend_options=fontName:Times%20New%20Roman;fontAntiAliasing:true;fontColor:0x000033;fontSize:10;bgColor:0xFFFFEE;dpi:180">
+            </div>
+                </div>
+                <div class="row mt-5 mb-5">
                 <div class="col-4">
                     <p>Update layer</p>
                     <form method="POST" class="post-form" enctype="multipart/form-data">
@@ -14,9 +20,11 @@
                     </form>
                 </div>
             </div>
-            {% for names in details.table_fields %}
-                <p>{{ names }}</p>
-            {% endfor %}
+            </div>
+
+            <a href="{% url 'layer_list' %}">
+                <button type="button" class="btn btn-danger">Back</button>
+            </a>
         </div>
     </div>
 {% endblock %}

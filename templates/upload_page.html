@@ -1,14 +1,17 @@
 {% extends "base_text.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-  <div class="container">
-  <div class="col-5">
-    <h1>Upload data</h1>
-    <form method="POST" class="post-form" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form|crispy }}
-      <button type="submit" class="save btn btn-success">Upload</button>
-    </form>
-  </div>
-  </div>
+    <div class="container">
+        <div class="col-5">
+            <h1>Upload Layer</h1>
+            <form method="POST" class="post-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="save btn btn-success">Upload</button>
+            </form>
+            <a href="{% url 'layer_list' %}">
+                <button type="button" class="btn mt-1 btn-danger">Back</button>
+            </a>
+        </div>
+    </div>
 {% endblock %}

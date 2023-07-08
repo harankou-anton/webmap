@@ -1,29 +1,43 @@
 {% extends "base_text.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-  <div class="container">
-  <div class="col-5">
-    <h1>Layer List</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for detail in data %}
-        <tr>
-          <th scope="row">{{ forloop.counter }}</th>
-          <td>{{ detail.table_name }}</td>
-          <td>
-              <a class="btn btn-success" href="{% url 'details' detail.layer_id %}" role="button">Details</a>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  </div>
+    <div class="container">
+        <div class="col-5">
+            <h1>Layer List</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Update</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for detail in data %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ detail.table_name }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{% url 'details' detail.layer_id %}"
+                               role="button">Update</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-4">
+                    <a href="{% url 'upload_file' %}">
+                        <button type="button" class="btn btn-primary">Upload Layer</button>
+                    </a>
+                </div>
+                <div class="col-3">
+                    <a href="{% url 'map' %}">
+                        <button type="button" class="btn btn-danger">Back</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}
