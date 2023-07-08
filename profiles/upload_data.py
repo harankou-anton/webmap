@@ -29,4 +29,5 @@ def uploading_process(file_name, table_name, owner_layer):
                     username=settings.GEOSERVER["LOGIN_GEOSERVER"],
                     password=settings.GEOSERVER["PASSWORD_GEOSERVER"])
     geo.publish_featurestore(store_name='geo_data', pg_table=uuid_table, workspace='layers')
+    geo.publish_style(layer_name=uuid_table, style_name='default_style', workspace='layers')
     return

@@ -18,12 +18,12 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 
-from map.views import IndexView
+from map.views import index
 from profiles.views import auth, register, upload_file, layer_list, details
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view(), name='map'),
+    path('', index, name='map'),
     path('signin', auth, name='auth'),
     path('signup', register, name='register'),
     path("upload", upload_file, name='upload_file'),

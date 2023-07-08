@@ -1,10 +1,8 @@
 from django.conf import settings
-from profiles.models import Layer, LayerAccess
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 import geopandas as gpd
-from geo.Geoserver import Geoserver
 
 
 def updating_process(file_name, uuid_table):
@@ -19,7 +17,7 @@ def updating_process(file_name, uuid_table):
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Update data to database's tables
+    # Update data in database
     statement = text(f'DELETE FROM geodata."{uuid_table}";')
     session.execute(statement)
     session.commit()

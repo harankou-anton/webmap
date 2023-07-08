@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from profiles.forms import LoginForm, RegisterForm, UploadedData, UpdateData
 from profiles.upload_data import uploading_process
 from profiles.update_data import updating_process
-from profiles.models import LayerAccess, Layer, Accsess
+from profiles.models import Layer
 from django.db.models import Q
 
 
@@ -44,13 +44,14 @@ def register(request):
 
 def upload_file(request):
     if request.method == "POST":
-        form = UploadedData (request.POST, request.FILES)
+        form = UploadedData(request.POST, request.FILES)
         if form.is_valid():
             uploading_process(request.FILES['file'], form.cleaned_data['name'], request.user.id)
             return redirect("map")
     else:
         form = UploadedData()
     return render(request, "upload_page.html", {"form": form})
+
 
 def layer_list(request):
     data = Layer.objects.filter(Q(layer_accsses__access_code=0) & Q(layer_accsses__user_id=request.user.id))
@@ -65,4 +66,5 @@ def details(request, layer_id):
         if form.is_valid():
             updating_process(request.FILES['file'], layer_id)
             return redirect("map")
+
     return render(request, "details.html", {"details": details, "form": form})
