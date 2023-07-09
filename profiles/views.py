@@ -5,8 +5,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from profiles.forms import LoginForm, RegisterForm, UploadedData, UpdateData
 from profiles.upload_data import uploading_process
 from profiles.update_data import updating_process
+from profiles.upload_style import uploading_style
 from profiles.models import Layer
 from django.db.models import Q
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 # Create your views here.
@@ -65,11 +69,21 @@ def layer_list(request):
 
 def details(request, layer_id):
     details = get_object_or_404(Layer, layer_id=layer_id)
-    form = UpdateData()
-    if request.method == "POST":
-        form = UpdateData(request.POST, request.FILES)
-        if form.is_valid():
-            updating_process(request.FILES['file'], layer_id)
-            return redirect("map")
+    form_layer = UpdateData()
+    form_style = UploadedData()
 
-    return render(request, "details.html", {"details": details, "form": form})
+    if request.POST.get("upd-layer"):
+        form_layer = UpdateData(request.POST, request.FILES)
+        if form_layer.is_valid():
+            updating_process(request.FILES['file'], layer_id)
+            return redirect("layer_list")
+
+    if request.POST.get("upd-style"):
+        form_style = UploadedData(request.POST, request.FILES)
+
+        if form_style.is_valid():
+            uploading_style(request.FILES['file'], form_style.cleaned_data['name'], layer_id)
+            return redirect("layer_list")
+
+    context = {"details": details, "form_layer": form_layer, "form_style": form_style}
+    return render(request, "details.html", context=context)

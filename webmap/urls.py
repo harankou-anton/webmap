@@ -28,7 +28,7 @@ urlpatterns = [
     path('signup', register, name='register'),
     path("upload", upload_file, name='upload_file'),
     path("layers", layer_list, name='layer_list'),
-    path("details/<layer_id>/", details, name="details"),
+    path("details/<layer_id>/edit", details, name="details"),
     path("signout", logout_view, name='signout'),
 ]
 

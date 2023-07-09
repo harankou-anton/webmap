@@ -9,7 +9,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Update</th>
+                    <th scope="col">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                         <td>{{ detail.table_name }}</td>
                         <td>
                             <a class="btn btn-success" href="{% url 'details' detail.layer_id %}"
-                               role="button">Update</a>
+                               role="button">Details</a>
                         </td>
                     </tr>
                 {% endfor %}

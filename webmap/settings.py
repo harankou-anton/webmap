@@ -142,3 +142,27 @@ GEOSERVER = {
     "WORKSPACES": "layers",
     "STORE_NAME": 'geo_data'
 }
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+    },
+    "formatters": {
+        "simple": {"format": "%(levelname)s %(asctime)s %(message)s"},
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "ERROR",
+        },
+    },
+}
