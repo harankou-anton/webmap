@@ -27,3 +27,9 @@ class LayerAccess(models.Model):
 class Accsess(models.Model):
     access_code = models.IntegerField(primary_key=True)
     name = models.CharField()
+
+
+class Project(models.Model):
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="projects")
+    proj_name = models.CharField()
+    table_fields = models.JSONField(null=True, blank=True)
