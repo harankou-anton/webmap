@@ -1,11 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+
 from profiles.forms import LoginForm, RegisterForm, UploadedData, UpdateData
-from profiles.upload_data import uploading_process
-from profiles.update_data import updating_process
-from profiles.upload_style import uploading_style
+from profiles.upload_update_delete import uploading_style, uploading_process, updating_process, delete_layer
 from profiles.models import Layer
 from django.db.models import Q
 import logging
@@ -87,3 +87,8 @@ def details(request, layer_id):
 
     context = {"details": details, "form_layer": form_layer, "form_style": form_style}
     return render(request, "details.html", context=context)
+
+
+def delete_page(request, layer_id):
+    delete_layer(layer_id)
+    return HttpResponseRedirect(reverse('layer_list'))

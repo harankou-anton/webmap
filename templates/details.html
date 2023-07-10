@@ -4,6 +4,8 @@
 
     <div class="container">
         <h1>{{ details.table_name }}</h1>
+        <a class="btn btn-danger mb-3" href="{% url 'delete' details.layer_id %}" role="button">Delete</a>
+
         <div class="row mb-5">
             <div class="col-5">
                 <b>Update layer</b>

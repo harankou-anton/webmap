@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path
 
 from map.views import index
-from profiles.views import auth, register, upload_file, layer_list, details, logout_view
+from profiles.views import auth, register, upload_file, layer_list, details, logout_view, delete_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,7 @@ urlpatterns = [
     path("layers", layer_list, name='layer_list'),
     path("details/<layer_id>/edit", details, name="details"),
     path("signout", logout_view, name='signout'),
+    path("delete/<layer_id>", delete_page, name='delete')
 ]
 
 if settings.DEBUG:
