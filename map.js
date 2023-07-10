@@ -1,4 +1,3 @@
-// Создаем функцию для создания WMS слоя
 function createWMSLayer(layerName) {
     return new ol.layer.Tile({
         source: new ol.source.TileWMS({
@@ -13,18 +12,6 @@ function createWMSLayer(layerName) {
     });
 }
 
-// Создаем функцию для добавления WMS слоя в группу слоев
-function addWMSLayerToGroup(group, layer) {
-  group.getLayers().push(layer);
-}
-
-function setVisability(layer){
-    layer.setVisable(true)
-}
-
-function setUnVisability(layer){
-    layer.setVisable(false)
-}
 
 const view = new ol.View({
     center: ol.proj.fromLonLat([26, 53.8]),
@@ -50,19 +37,11 @@ const googleImages = new ol.layer.Tile({
 });
 
 var map = new ol.Map({
-    layers: [
-
-    ],
+    layers: [],
     target: 'map',
     view: view,
 });
 
-const projectlayergroup = new ol.layer.Group({
-    layers: [],
-    visible: false,
-    zIndex:99
-});
-map.addLayer(projectlayergroup)
 
 const baselayergroup = new ol.layer.Group({
     layers: [osmlayer, googleImages],
@@ -77,7 +56,6 @@ for (let baseLayer of baseLayerSelector) {
     baseLayer.addEventListener('click', function () {
         let baseLayerValue = this.value;
         baselayergroup.getLayers().forEach(function (element, index, array) {
-            console.log(element);
             let baseLayerTitle = element.get('title');
             element.setVisible(baseLayerTitle === baseLayerValue);
         })
@@ -88,10 +66,7 @@ for (let baseLayer of baseLayerSelector) {
 const projectValueElements = document.getElementById('proj-work').querySelectorAll("input[type=checkbox]")
 
 for (var i = 0; i < projectValueElements.length; i++) {
-    console.log(projectValueElements[i].value);
     window[projectValueElements[i].value] = createWMSLayer(projectValueElements[i].value)
-    // eval('var s_' + projectValueElements[i].value + ' = ' + createWMSLayer(projectValueElements[i].value));
-    console.log (window[projectValueElements[i].value]);
     projectValueElements[i].addEventListener('change', function () {
         if (this.checked) {
             map.addLayer(window[this.value]);
@@ -103,6 +78,38 @@ for (var i = 0; i < projectValueElements.length; i++) {
 
 
 //get coords on click
+// map.on('singleclick', function (evt) {
+//     console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))
+//
+// });
+
 map.on('singleclick', function (evt) {
-    console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))
+    document.getElementById('info').innerHTML = '';
+    var viewResolution = map.getView().getResolution();
+    var url = '';
+
+    map.getLayers().forEach(function (layer) {
+        if (layer.get('visible') && layer instanceof ol.layer.Tile) {
+            var source = layer.get('source');
+
+            if (source instanceof ol.source.TileWMS) {
+
+                url = source.getFeatureInfoUrl(
+                    evt.coordinate,
+                    viewResolution,
+                    'EPSG:3857',
+                    {'INFO_FORMAT': 'text/html',
+                    'FEATURE_COUNT': '5'}
+                );
+
+                if (url) {
+                    fetch(url)
+                        .then((response) => response.text())
+                        .then((html) => {
+                            document.getElementById('info').innerHTML += html;
+                        });
+                }
+            }
+        }
+    });
 });
