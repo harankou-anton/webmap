@@ -3,10 +3,9 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
 from profiles.forms import LoginForm, RegisterForm, UploadedData, UpdateData
 from profiles.upload_update_delete import uploading_style, uploading_process, updating_process, delete_layer
-from profiles.models import Layer
+from profiles.models import Layer, LayerAccess, Accsess
 from django.db.models import Q
 import logging
 
@@ -92,3 +91,18 @@ def details(request, layer_id):
 def delete_page(request, layer_id):
     delete_layer(layer_id)
     return HttpResponseRedirect(reverse('layer_list'))
+
+
+def share_layer(request, layer_id):
+    details = get_object_or_404(Layer, layer_id=layer_id)
+    levels = Accsess.objects.exclude(access_code=0)
+    accesses = LayerAccess.objects.filter(layer_id_id=layer_id).exclude(access_code_id=0)
+    if request.POST.get("share-btn"):
+        email_field = request.POST.get("email-input")
+        level = request.POST.get("level")
+        search_user = User.objects.get(email=email_field)
+        LayerAccess.objects.create(access_code_id=level, layer_id_id=layer_id,
+                                   user_id_id=search_user.id)
+        return redirect("layer_list")
+    context = {"details": details, "levels": levels, "accesses": accesses}
+    return render(request, "share.html", context)

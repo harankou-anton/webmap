@@ -1,0 +1,51 @@
+{% extends "base_text.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <div class="container">
+        <div class="col-5">
+            <h1>Share layer</h1>
+            <h4> Layer name - {{ details.table_name }}</h4>
+            <form method="POST" class="post-form">
+                {% csrf_token %}
+                <label for="exampleInputEmail1" class="form-label">User email</label>
+                <input type="email" class="form-control mb-3" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       name="email-input">
+                <select class="form-select mb-3" name="level">
+                    {% for level in levels %}
+                        <option value="{{ level.access_code }}">{{ level.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <input type="submit" class="save btn btn-success mb-3" name="share-btn" value="Share">
+            </form>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for access in accesses %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ access.user_id }}</td>
+                        <td>{{ access.access_code.name }}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{% url 'details' details.layer_id %}">
+                <button type="button" class="btn btn-danger">Back</button>
+            </a>
+
+        </div>
+    </div>
+{% endblock %}

@@ -30,7 +30,8 @@
                     <label class="form-check-label" for="flexCheckDefault">
                         {{ layer.table_name }}
                     </label><br>
-                    <img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=layers:{{ layer.layer_id }}&WIDTH=10&HEIGHT=10&Transparent=True&scale=1&legend_options=fontName:Times%20New%20Roman;fontAntiAliasing:true;fontColor:0x000033;fontSize:10;bgColor:0xFFFFEE;dpi:180"><br><br>
+                    <img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=layers:{{ layer.layer_id }}&WIDTH=10&HEIGHT=10&Transparent=True&scale=1&legend_options=fontName:Times%20New%20Roman;fontAntiAliasing:true;fontColor:0x000033;fontSize:10;bgColor:0xFFFFEE;dpi:180">
+                    <br><br>
                 {% endfor %}
             </div>
         </div>
@@ -54,8 +55,8 @@
                     Select Project
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Pr1</a></li>
-                    <li><a class="dropdown-item" href="#">Pr2</a></li>
+                    <li><a class="dropdown-item" href="#">Project1</a></li>
+                    <li><a class="dropdown-item" href="#">Project2</a></li>
                 </ul>
             </div>
             <a href="{% url 'signout' %}">
@@ -64,12 +65,12 @@
         </div>
     {% else %}
         <div class="container" id="proj-canv">
-        <div class="col" id="name-head">
-            <p>Cool app name</p>
-        </div>
-        <div class="col" id="proj-work">
+            <div class="col" id="name-head">
+                <p>Cool app name</p>
+            </div>
+            <div class="col" id="proj-work">
 
-        </div>
+            </div>
         </div>
         <div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="buttons-unauth">
             <a href="{% url 'register' %}">
